@@ -18,7 +18,7 @@ def parse_arguments():
     arguments = arguments_parser.parse_args()
     return arguments
 
-def replacetmpl(file, setng, savefl=False):
+def replacetmpl(file, setng, sprovider='virtualbox'):
     try:
         ovrFile='template/Vagrantfile'
         shutil.copy(file, ovrFile)
@@ -26,6 +26,7 @@ def replacetmpl(file, setng, savefl=False):
         print("Error: File %s does not appear to exist." % ovrFile)
 
     for line in fileinput.input(ovrFile, inplace=True):
+        line = line.replace('{{ Vprovider }}',sprovider)
         line = line.rstrip('\r\n')
         print(setng.get(line, line))
 
@@ -54,11 +55,12 @@ def main():
         '#VMEMORY#': 'MEMORY = 1024',
         '#VCPU#': 'CPU = 1',
         '#VCOUNT#': 'NODE_COUNT = 2',
-        '#NETPR#': 'NET_PREF = 10.11.0'
+        '#NETPR#': 'NET_PREF = 10.11.0',
+        '#PROVIDER#': '    config.vm.provider "{{ Vprovider }}" do |v|'
     }
 
     templfile='template/Vagrantfile.tmpl'
-    replacetmpl(templfile, setng)
+    replacetmpl(templfile, setng, vm_provider)
 
 
 if __name__ == '__main__':
