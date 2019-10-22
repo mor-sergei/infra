@@ -1,10 +1,12 @@
+#GENERATION#
+
 ENV["LC_ALL"] = "en_US.UTF-8"
 
-BOX_IMAGE = "{{ Vimage }}" 
-MEMORY = {{ Vmemory }} 
-CPU = {{ Vcpu }}
-NODE_COUNT = {{ Vcpu }}
-NET_PREF = {{ Vnet }}
+#VIMAGE#
+#VMEMORY#
+#VCPU#
+#VCOUNT#
+#NETPR#
 
 Vagrant.configure("2") do |config|
     config.vm.provider "{{ Vprovider }}" do |v|
@@ -21,11 +23,17 @@ Vagrant.configure("2") do |config|
         end
     end
 
-# Provisioning
     config.vm.provision "default", type: "shell", inline: <<-SHELL
       echo "-=PROVISION DEFAULT STAGE=-"
       sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
       sudo apt-get update
       sudo apt-get upgrade -qq
-      {{ Vapp }}
+    SHELL
+
+    config.vm.provision "base", type: "shell", inline: <<-SHELL
+      echo "-=PROVISION BASE STAGE=-"
+      sudo apt-get update
+      sudo apt-get upgrade -qq
+      sudo apt-get install mc
+      sudo apt-get install git
     SHELL
