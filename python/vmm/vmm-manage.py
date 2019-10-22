@@ -56,7 +56,6 @@ def main():
         '#VCPU#': 'CPU = 1',
         '#VCOUNT#': 'NODE_COUNT = 2',
         '#NETPR#': 'NET_PREF = 10.11.0',
-        '#PROVIDER#': '    config.vm.provider "{{ Vprovider }}" do |v|'
     }
 
     templfile='template/Vagrantfile.tmpl'
