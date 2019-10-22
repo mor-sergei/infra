@@ -57,6 +57,7 @@ def execute_vm(exec_path='.'):
         shutil.copy(ovrFile,dstFile)
         #subprocess.call(['vagrant', 'up'])
         subprocess.call(['echo', 'VM getting up ... %s' % dstFile], cwd=exec_path)
+        subprocess.call(['ls', '-alh'], cwd=exec_path)
     except IOError:
         print("Error: File %s does not appear to exist." % ovrFile)
         exit (1)
