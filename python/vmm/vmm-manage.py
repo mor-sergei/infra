@@ -12,8 +12,8 @@ def parse_arguments():
     :return: Object with parsed input arguments arguments.
     """
     arguments_parser = argparse.ArgumentParser()
-    arguments_parser.add_argument('-docpath', required=True, dest='docpath', metavar='destination_documentation_path',
-                                  type=str, help='')
+    arguments_parser.add_argument('--kvm', help='Using KVM as VM provider', action="store_true")
+    arguments_parser.add_argument('--virtualbox', help='Using KVM as VM provider', action="store_true")
 
     arguments = arguments_parser.parse_args()
     return arguments
@@ -29,8 +29,25 @@ def replacetmpl(file, setng, savefl=False):
         line = line.rstrip('\r\n')
         print(setng.get(line, line))
 
+def logging(message, frm='info'):
+    if frm == 'info':
+        print('-- info: {} --'.format(message))
+    elif frm == 'cfg':
+        print('-- congig: {} --'.format(message))
 
 def main():
+    args = parse_arguments()
+
+    if args.kvm:
+        logging('KVM turned on', 'cfg')
+        vm_provider = 'kvm'
+    elif args.virtualbox:
+        logging('VirtualBox turned on', 'cfg')
+        vm_provider = 'virtualbox'
+    else:
+        logging('VirtualBox turned on', 'cfg')
+        vm_provider = 'virtualbox'
+
     setng = {
         '#GENERATION#': '# Config generated: %s' % datetime.datetime.now(),
         '#VIMAGE#': 'BOX_IMAGE = debian/jessie64',
