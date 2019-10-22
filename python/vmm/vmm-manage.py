@@ -4,6 +4,7 @@ import shutil
 import fileinput
 import datetime
 import argparse
+import subprocess
 
 
 def parse_arguments():
@@ -24,6 +25,8 @@ def parse_arguments():
                         help='VM box nodes count')
     arguments_parser.add_argument('-p', '--netprefix', required=True, action='store', dest='vm_netprefix',
                         help='VM box network prefix ex: 10.10.0')
+    arguments_parser.add_argument('-e', '--exec', action='store', dest='exec_path',
+                        help='VM box init path')
 
     arguments = arguments_parser.parse_args()
     return arguments
@@ -45,6 +48,18 @@ def logging(message, frm='info'):
         print('-- info: {} --'.format(message))
     elif frm == 'cfg':
         print('-- congig: {} --'.format(message))
+
+def execute_vm(exec_path='.'):
+    try:
+        ovrFile='template/Vagrantfile'
+        dstFile=exec_path + '/Vagrantfile'
+        logging('Destanation target: {}'.format(dstFile))
+        shutil.copy(ovrFile,dstFile)
+        #subprocess.call(['vagrant', 'up'])
+        subprocess.call(['echo', 'VM getting up ... %s' % dstFile], cwd=exec_path)
+    except IOError:
+        print("Error: File %s does not appear to exist." % ovrFile)
+        exit (1)
 
 def main():
     args = parse_arguments()
@@ -70,6 +85,8 @@ def main():
 
     templfile='template/Vagrantfile.tmpl'
     replacetmpl(templfile, setng, vm_provider)
+    if args.exec_path:
+        execute_vm(args.exec_path)
 
 
 if __name__ == '__main__':
