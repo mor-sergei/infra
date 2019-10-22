@@ -14,6 +14,16 @@ def parse_arguments():
     arguments_parser = argparse.ArgumentParser()
     arguments_parser.add_argument('--kvm', help='Using KVM as VM provider', action="store_true")
     arguments_parser.add_argument('--virtualbox', help='Using KVM as VM provider', action="store_true")
+    arguments_parser.add_argument('-i', '--img', required=True, action='store', dest='vm_image',
+                    help='Vagrant VM image')
+    arguments_parser.add_argument('-m', '--memory', required=True, action='store', dest='vm_memory',
+                    help='VM box memory size')
+    arguments_parser.add_argument('-c', '--cpu', required=True, action='store', dest='vm_cpu',
+                        help='VM box CPU count')
+    arguments_parser.add_argument('-n', '--node', required=True, action='store', dest='vm_node',
+                        help='VM box nodes count')
+    arguments_parser.add_argument('-p', '--netprefix', required=True, action='store', dest='vm_netprefix',
+                        help='VM box network prefix ex: 10.10.0')
 
     arguments = arguments_parser.parse_args()
     return arguments
@@ -51,11 +61,11 @@ def main():
 
     setng = {
         '#GENERATION#': '# Config generated: %s' % datetime.datetime.now(),
-        '#VIMAGE#': 'BOX_IMAGE = debian/jessie64',
-        '#VMEMORY#': 'MEMORY = 1024',
-        '#VCPU#': 'CPU = 1',
-        '#VCOUNT#': 'NODE_COUNT = 2',
-        '#NETPR#': 'NET_PREF = 10.11.0',
+        '#VIMAGE#': 'BOX_IMAGE = \"%s\"' % args.vm_image,
+        '#VMEMORY#': 'MEMORY = %s' % args.vm_memory,
+        '#VCPU#': 'CPU = %s' % args.vm_cpu,
+        '#VCOUNT#': 'NODE_COUNT = %s' % args.vm_node,
+        '#NETPR#': 'NET_PREF = %s' % args.vm_netprefix,
     }
 
     templfile='template/Vagrantfile.tmpl'
