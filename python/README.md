@@ -23,4 +23,5 @@ Install and connect to the box:
 * Password: __vagrant__
 
 '<https://app.vagrantup.com/peru/boxes/ubuntu-18.04-server-amd64>' All details.
+'<https://github.com/vagrant-libvirt/vagrant-libvirt>' Vagrant Libvirt Provider - details.
 '<https://en.wikibooks.org/wiki/QEMU/Installing_QEMU>' Good to know before start.
