@@ -13,7 +13,7 @@ def parse_arguments():
     :return: Object with parsed input arguments arguments.
     """
     arguments_parser = argparse.ArgumentParser()
-    arguments_parser.add_argument('--kvm', help='Using KVM as VM provider', action="store_true")
+    arguments_parser.add_argument('--libvirt', help='Using KVM-libvirt as VM provider', action="store_true")
     arguments_parser.add_argument('--virtualbox', help='Using KVM as VM provider', action="store_true")
     arguments_parser.add_argument('-i', '--img', required=True, action='store', dest='vm_image',
                     help='Vagrant VM image')
@@ -65,9 +65,9 @@ def execute_vm(exec_path='.'):
 def main():
     args = parse_arguments()
 
-    if args.kvm:
-        logging('KVM turned on', 'cfg')
-        vm_provider = 'kvm'
+    if args.libvirt:
+        logging('KVM-libvirt turned on', 'cfg')
+        vm_provider = 'libvirt'
     elif args.virtualbox:
         logging('VirtualBox turned on', 'cfg')
         vm_provider = 'virtualbox'
