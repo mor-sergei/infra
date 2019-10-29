@@ -12,8 +12,8 @@
 			"os": "windows",
 			"arch": "amd",
 			"version": "4.9.4",
-			"C": "C:/XCompilers/target/LinuxPC/gcc4.9/Windows/bin/x86_64-pc-linux-gnu-gcc.exe",
-			"CC": "C:/XCompilers/target/LinuxPC/gcc4.9/Windows/bin/x86_64-pc-linux-gnu-g++.exe"
+			"C": "C:/XCompilers/gcc4.9/Windows/bin/x86_64-pc-linux-gnu-gcc.exe",
+			"CC": "C:/XCompilers/gcc4.9/Windows/bin/x86_64-pc-linux-gnu-g++.exe"
 		},
 		{
 			"os": "linux",
@@ -26,8 +26,8 @@
 			"os": "windows",
 			"arch": "arm",
 			"version": "4.9.4",
-			"C": "C:/XCompilers/target/NUM02/gcc4.9/Windows/bin/arm-linux-gnueabihf-gcc.exe",
-			"CC": "C:/XCompilers/target/NUM02/gcc4.9/Windows/bin/arm-linux-gnueabihf-g++.exe"
+			"C": "C:/XCompilers/gcc4.9/Windows/bin/arm-linux-gnueabihf-gcc.exe",
+			"CC": "C:/XCompilers/gcc4.9/Windows/bin/arm-linux-gnueabihf-g++.exe"
 		},
 		{
 			"os": "linux",
@@ -40,8 +40,8 @@
 			"os": "windows",
 			"arch": "arm",
 			"version": "7.4.1",
-			"C": "C:/XCompilers/target/NUM02/Windows/gcc-linaro-7.4.1-2019.02-i686-mingw32_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc.exe",
-			"CC": "C:/XCompilers/target/NUM02/Windows/gcc-linaro-7.4.1-2019.02-i686-mingw32_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++.exe"
+			"C": "C:/XCompilers/Windows/gcc-linaro-7.4.1-2019.02-i686-mingw32_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc.exe",
+			"CC": "C:/XCompilers/Windows/gcc-linaro-7.4.1-2019.02-i686-mingw32_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++.exe"
 		}
 	]
 }}
